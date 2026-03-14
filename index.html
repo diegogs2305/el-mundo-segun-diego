@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Mundo Según Diego</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Inter,system-ui,Arial;
+background:#000;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* NAV estilo Apple */
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:14px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(12px);
+z-index:100;
+}
+
+nav .logo{font-weight:700}
+
+nav .links a{
+margin-left:25px;
+text-decoration:none;
+color:#fff;
+opacity:.8;
+font-weight:500
+}
+
+nav .links a:hover{opacity:1}
+
+/* HERO tipo keynote */
+.hero{
+height:85vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:120px 60px 60px 60px;
+background-size:cover;
+background-position:center;
+background-image:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.2)),url("PORTADA.jpg");
+}
+
+.hero h1{
+font-size:72px;
+margin:0;
+max-width:700px;
+animation:fadeUp 1s ease
+}
+
+.hero p{
+max-width:600px;
+font-size:20px;
+opacity:.9;
+margin-top:15px;
+animation:fadeUp 1.4s ease
+}
+
+.hero .buttons{margin-top:25px;animation:fadeUp 1.8s ease}
+
+.btn{
+display:inline-block;
+padding:14px 26px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
+margin-right:10px
+}
+
+.btn-play{background:#fff;color:#000}
+.btn-spotify{background:#1db954;color:#000}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(40px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+section{padding:40px 60px}
+section h2{font-size:28px;margin-bottom:20px}
+
+/* BUSCADOR */
+.search{
+margin-bottom:20px
+}
+
+.search input{
+width:100%;
+padding:14px;
+font-size:16px;
+border-radius:10px;
+border:none;
+background:#111;
+color:#fff
+}
+
+/* FILA NETFLIX */
+.episodes-row{
+display:flex;
+gap:20px;
+overflow-x:auto;
+padding-bottom:10px
+}
+
+.episode{
+min-width:320px;
+background:#111;
+border-radius:14px;
+padding:20px;
+transition:transform .25s, box-shadow .25s;
+cursor:pointer
+}
+
+.episode:hover{
+transform:scale(1.05);
+box-shadow:0 20px 40px rgba(0,0,0,.7)
+}
+
+.episode h3{margin:0 0 6px 0;font-size:18px}
+.episode p{opacity:.7;font-size:14px}
+
+/* CONTADOR */
+.views{
+margin-top:6px;
+font-size:13px;
+opacity:.6
+}
+
+/* REPRODUCTOR FLOTANTE */
+.floating-player{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
+padding:14px 20px;
+display:none;
+align-items:center;
+justify-content:space-between;
+box-shadow:0 -10px 30px rgba(0,0,0,.8);
+z-index:200
+}
+
+.floating-player iframe{
+border:none;
+height:80px;
+width:60%
+}
+
+.close-player{
+cursor:pointer;
+opacity:.7
+}
+
+.about{
+max-width:900px;
+line-height:1.7;
+opacity:.9;
+font-size:18px
+}
+
+footer{
+margin-top:40px;
+padding:40px 60px;
+background:#050505;
+opacity:.7
+}
+
+.message{
+background:#111;
+padding:20px;
+border-radius:10px;
+max-width:600px
+}
+
+@media (max-width:700px){
+.hero{padding:120px 25px}
+.hero h1{font-size:42px}
+section{padding:30px 25px}
+nav{padding:12px 20px}
+.floating-player iframe{width:100%}
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">🎙️ El Mundo Según Diego</div>
+<div class="links">
+<a href="#episodios">Episodios</a>
+<a href="#sobre">Sobre</a>
+<a href="#spotify">Spotify</a>
+</div>
+</nav>
+
+<div class="hero">
+<h1>El Mundo Según Diego</h1>
+<p>Tecnología, actualidad, deportes y curiosidades del mundo contadas de forma clara y entretenida.</p>
+<div class="buttons">
+<a class="btn btn-play" href="#episodios">▶ Escuchar</a>
+<a class="btn btn-spotify" href="#spotify">Spotify</a>
+</div>
+</div>
+
+<section id="episodios">
+<h2>Últimos episodios</h2>
+
+<div class="search">
+<input id="searchInput" placeholder="Buscar episodios...">
+</div>
+
+<div id="episodes" class="episodes-row"></div>
+<div id="episodesMessage" class="message" style="display:none"></div>
+
+</section>
+
+<section id="sobre">
+<h2>Sobre el podcast</h2>
+<p class="about">
+Bienvenido a la web oficial de <b>El Mundo Según Diego</b>. Un podcast donde hablamos de tecnología, noticias, deportes y cualquier cosa interesante que esté pasando en el mundo.
+
+Los episodios se cargan automáticamente desde el RSS del podcast.
+</p>
+</section>
+
+<section id="spotify">
+<h2>Escuchar en Spotify</h2>
+<iframe src="https://open.spotify.com/show/40ZdFHguVhewxbw9lJUdNg" height="232" frameborder="0"></iframe>
+</section>
+
+<footer>
+© 2026 El Mundo Según Diego
+</footer>
+
+<!-- reproductor flotante -->
+<div id="player" class="floating-player">
+<div id="playerTitle"></div>
+<iframe id="playerFrame"></iframe>
+<div class="close-player" onclick="cerrarPlayer()">✕</div>
+</div>
+
+<script>
+
+const RSS_URL="https://api.rss2json.com/v1/api.json?rss_url=https://anchor.fm/s/10e34dfdc/podcast/rss";
+
+let episodiosGlobal=[];
+
+function mostrarMensaje(t){
+const box=document.getElementById("episodesMessage");
+box.style.display="block";
+box.innerText=t;
+}
+
+function getViews(id){
+return Number(localStorage.getItem("views_"+id)||0);
+}
+
+function addView(id){
+let v=getViews(id)+1;
+localStorage.setItem("views_"+id,v);
+return v;
+}
+
+function crearEpisodeCard(ep,i){
+
+const div=document.createElement("div");
+div.className="episode";
+
+let fecha=ep.pubDate?ep.pubDate.substring(0,10):"";
+
+let embed="";
+
+if(ep.link && ep.link.includes("spotify")){
+embed=ep.link.replace("episode","embed/episode");
+}
+
+const views=getViews(i);
+
+ div.innerHTML=`
+ <h3>${ep.title||"Episodio"}</h3>
+ <p>${fecha}</p>
+ <div class="views">▶ ${views} reproducciones</div>
+ `;
+
+ div.onclick=()=>{
+
+const v=addView(i);
+
+abrirPlayer(embed,ep.title);
+
+div.querySelector(".views").innerText="▶ "+v+" reproducciones";
+
+};
+
+return div;
+}
+
+function abrirPlayer(url,title){
+
+const player=document.getElementById("player");
+const frame=document.getElementById("playerFrame");
+
+frame.src=url;
+
+document.getElementById("playerTitle").innerText=title;
+
+player.style.display="flex";
+
+}
+
+function cerrarPlayer(){
+
+const player=document.getElementById("player");
+
+player.style.display="none";
+
+document.getElementById("playerFrame").src="";
+
+}
+
+function renderEpisodes(lista){
+
+const container=document.getElementById("episodes");
+
+container.innerHTML="";
+
+lista.forEach((ep,i)=>{
+container.appendChild(crearEpisodeCard(ep,i));
+});
+
+}
+
+async function cargarEpisodios(){
+
+if(!RSS_URL.includes("http")){
+mostrarMensaje("Debes añadir el RSS del podcast.");
+return;
+}
+
+try{
+
+const res=await fetch(RSS_URL);
+
+if(!res.ok) throw new Error("RSS no disponible");
+
+const data=await res.json();
+
+if(!data || !Array.isArray(data.items)){
+mostrarMensaje("RSS inválido.");
+return;
+}
+
+episodiosGlobal=data.items.slice(0,20);
+
+renderEpisodes(episodiosGlobal);
+
+}catch(e){
+console.error(e);
+mostrarMensaje("Error cargando episodios.");
+}
+
+}
+
+/* BUSCADOR */
+
+document.getElementById("searchInput").addEventListener("input",e=>{
+
+const q=e.target.value.toLowerCase();
+
+const filtrados=episodiosGlobal.filter(ep=>
+(ep.title||"").toLowerCase().includes(q)
+);
+
+renderEpisodes(filtrados);
+
+});
+
+/* TESTS */
+function runTests(){
+
+console.assert(typeof crearEpisodeCard==="function","crearEpisodeCard debe existir");
+
+const ep={title:"Test",pubDate:"2024-01-01",link:"https://open.spotify.com/episode/test"};
+
+const card=crearEpisodeCard(ep,1);
+
+console.assert(card.className==="episode","Debe tener clase episode");
+
+console.assert(card.innerHTML.includes("Test"),"Debe incluir título");
+
+console.assert(getViews(1)>=0,"views debe devolver número");
+
+}
+
+runTests();
+
+cargarEpisodios();
+
+</script>
+
+</body>
+</html>
