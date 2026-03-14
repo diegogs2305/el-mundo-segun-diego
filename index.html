@@ -12,9 +12,30 @@
 body{
 margin:0;
 font-family:Inter,system-ui,Arial;
-background:#000;
+/* fondo más agradable tipo Apple */
+background:linear-gradient(180deg,#0f172a 0%,#020617 60%,#000 100%);
 color:#fff;
 overflow-x:hidden;
+}
+
+/* brillo suave en el fondo */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 15% 20%, rgba(59,130,246,.35), transparent 45%),
+radial-gradient(circle at 85% 25%, rgba(16,185,129,.30), transparent 45%),
+radial-gradient(circle at 60% 80%, rgba(236,72,153,.25), transparent 45%),
+radial-gradient(circle at 30% 70%, rgba(251,191,36,.25), transparent 45%);
+pointer-events:none;
+z-index:-1;
+animation:ambientGlow 18s ease-in-out infinite alternate;
+}
+
+@keyframes ambientGlow{
+0%{filter:blur(40px) brightness(1)}
+100%{filter:blur(60px) brightness(1.15)}
 }
 
 /* NAV estilo Apple */
@@ -52,7 +73,7 @@ justify-content:center;
 padding:120px 60px 60px 60px;
 background-size:cover;
 background-position:center;
-background-image:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.2)),url("PORTADA.jpg");
+background-image:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.25)),url("PORTADA PODCAST.png");
 }
 
 .hero h1{
@@ -210,7 +231,7 @@ nav{padding:12px 20px}
 
 <div class="hero">
 <h1>El Mundo Según Diego</h1>
-<p>Tecnología, actualidad, deportes y curiosidades del mundo contadas de forma clara y entretenida.</p>
+<p>Tecnología, actualidad, trenes y curiosidades del mundo contadas de forma clara y entretenida.</p>
 <div class="buttons">
 <a class="btn btn-play" href="#episodios">▶ Escuchar</a>
 <a class="btn btn-spotify" href="#spotify">Spotify</a>
@@ -232,9 +253,7 @@ nav{padding:12px 20px}
 <section id="sobre">
 <h2>Sobre el podcast</h2>
 <p class="about">
-Bienvenido a la web oficial de <b>El Mundo Según Diego</b>. Un podcast donde hablamos de tecnología, noticias, deportes y cualquier cosa interesante que esté pasando en el mundo.
-
-Los episodios se cargan automáticamente desde el RSS del podcast.
+Bienvenido a la web oficial de <b>El Mundo Según Diego</b>. Un podcast donde hablamos de tecnología, noticias, trenes y cualquier cosa interesante que esté pasando en el mundo.
 </p>
 </section>
 
@@ -395,7 +414,7 @@ function runTests(){
 
 console.assert(typeof crearEpisodeCard==="function","crearEpisodeCard debe existir");
 
-const ep={title:"Test",pubDate:"2024-01-01",link:"https://open.spotify.com/episode/test"};
+const ep={title:"Test",pubDate:"2024-01-01",link:"https://open.spotify.com/show/40ZdFHguVhewxbw9lJUdNg"};
 
 const card=crearEpisodeCard(ep,1);
 
@@ -410,6 +429,12 @@ console.assert(getViews(1)>=0,"views debe devolver número");
 runTests();
 
 cargarEpisodios();
+
+</script>
+
+</body>
+</html>
+;
 
 </script>
 
